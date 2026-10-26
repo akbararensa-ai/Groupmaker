@@ -2,298 +2,315 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>rn4 Tournament</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050505">
+<title>RN4 — Tournament</title>
 <style>
 :root{
-  --blue:#5eead4;
-  --gold:#fde047;
+  --bg:#050505;--panel:#101010;--panel2:#171717;--line:#303030;
+  --text:#f5f5f5;--muted:#929292;--white:#fff;--black:#000;
 }
-*{box-sizing:border-box;font-family:Inter,Arial}
-
+*{box-sizing:border-box}
 body{
-  margin:0;
-  background:radial-gradient(circle at top,#0b1c3d,#020617);
-  color:white;
-  padding:20px;
+  margin:0;min-height:100vh;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
 }
-
-h1{
-  text-align:center;
-  letter-spacing:8px;
-  margin-bottom:5px;
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.app{max-width:1050px;margin:auto;padding:24px 16px 48px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+  width:44px;height:44px;display:grid;place-items:center;border-radius:12px;
+  background:#fff;color:#000;font-size:16px;font-weight:950;letter-spacing:-1px
 }
-.sub{text-align:center;opacity:.7;margin-bottom:25px}
-
+.brand h1{margin:0;font-size:20px;letter-spacing:4px}
+.brand p{margin:4px 0 0;color:var(--muted);font-size:9px;letter-spacing:2px}
+.status{font-size:9px;letter-spacing:1.5px;color:#bcbcbc}
+.status:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:#fff;margin-right:8px;vertical-align:middle}
+.hero{margin:42px 0 24px}
+.eyebrow{font-size:10px;color:#aaa;letter-spacing:3px}
+.hero h2{font-size:clamp(30px,7vw,46px);letter-spacing:-2px;line-height:1.05;margin:12px 0}
+.hero p{max-width:480px;color:var(--muted);font-size:13px;line-height:1.8;margin:0}
 .panel{
-  max-width:1100px;
-  margin:auto;
-  background:linear-gradient(145deg,#0b1c3d,#020617);
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,.7);
+  border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px;
+  background:linear-gradient(145deg,#121212,#090909)
 }
-
-.grid-2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.panel-head h3{font-size:11px;letter-spacing:1.5px;margin:0}
+.tag{font-size:9px;color:#aaa;border:1px solid #3b3b3b;padding:5px 8px;border-radius:5px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-size:10px;letter-spacing:.5px;color:#c7c7c7;margin-bottom:8px}
+textarea,input[type=number],select{
+  width:100%;background:#080808;color:#fff;border:1px solid #333;border-radius:9px;
+  padding:12px;outline:none;transition:border-color .2s
 }
-
-label{font-weight:700;margin-top:10px;display:block}
-textarea,select,input{
-  width:100%;
-  margin-top:6px;
-  padding:10px;
-  border-radius:10px;
-  border:none;
-  background:#020617;
-  color:white;
+textarea{min-height:130px;resize:vertical;font-size:12px;line-height:1.8}
+textarea:focus,input:focus,select:focus{border-color:#eee}
+::placeholder{color:#656565}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}
+.stat{border:1px solid #292929;border-radius:9px;padding:12px;background:#0a0a0a}
+.stat span{display:block;color:var(--muted);font-size:9px;letter-spacing:.5px}
+.stat strong{display:block;margin-top:6px;font-size:24px;font-weight:750}
+.settings{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:20px}
+.setting{min-width:0}
+.switch-row{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:11px;border:1px solid #303030;border-radius:9px;background:#090909;margin-bottom:10px}
+.switch-row span{font-size:11px;color:#ddd}
+input[type=checkbox]{accent-color:#fff;width:17px;height:17px}
+.btn{width:100%;border:1px solid transparent;border-radius:9px;padding:13px;
+  font-size:10px;font-weight:850;letter-spacing:1.1px;transition:transform .15s,background .15s}
+.btn:active{transform:scale(.985)}
+.primary{background:#fff;color:#000}
+.primary:hover{background:#ddd}
+.secondary{background:#111;border-color:#393939;color:#fff}
+.secondary:hover{background:#202020}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}
+.results-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:32px 0 15px}
+.results-head h2{margin:0;font-size:18px;letter-spacing:-.5px}
+.results-head span{font-size:9px;color:var(--muted);letter-spacing:1px;text-align:right}
+.groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.group{border:1px solid #303030;border-radius:12px;background:#0d0d0d;overflow:hidden;min-width:0}
+.group-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px;cursor:pointer;list-style:none}
+.group-head::-webkit-details-marker{display:none}
+.group-name{font-size:11px;font-weight:850;letter-spacing:1px}
+.group-meta{font-size:10px;color:var(--muted);margin-top:5px}
+.group-num{font-size:21px;font-weight:900;color:#454545}
+.group[open] .group-num{color:#fff}
+.members{border-top:1px solid #292929;padding:7px 14px 12px}
+.member{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #202020;font-size:12px}
+.member:last-child{border-bottom:0}
+.num{color:#666;font-size:10px;width:17px}
+.member-name{overflow-wrap:anywhere;flex:1}
+.gender{font-size:9px;min-width:23px;text-align:center;padding:4px 6px;border:1px solid #393939;border-radius:4px;color:#eee}
+.gender.P{background:#fff;color:#000;border-color:#fff}
+.empty{grid-column:1/-1;text-align:center;padding:35px 15px;border:1px dashed #333;
+  border-radius:12px;color:#888;font-size:12px;line-height:1.7}
+footer{text-align:center;margin-top:36px;color:#626262;font-size:9px;letter-spacing:2px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:#fff;color:#000;
+  border:1px solid #fff;border-radius:8px;padding:12px 18px;font-size:12px;opacity:0;
+  pointer-events:none;transition:.25s;z-index:5;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:600px){
+  .app{padding:18px 13px 35px}
+  .panel{padding:15px}
+  .form-grid,.settings,.groups{grid-template-columns:1fr}
+  .hero{margin-top:30px}
+  .brand h1{font-size:18px}
+  .status{font-size:8px}
+  .stats{gap:6px}
+  .stat{padding:10px}
+  .stat strong{font-size:21px}
 }
-textarea{min-height:120px}
-
-.stats{margin-top:10px;font-size:14px;opacity:.8}
-
-button{
-  width:100%;
-  margin-top:15px;
-  padding:14px;
-  font-weight:900;
-  border:none;
-  border-radius:14px;
-  cursor:pointer;
-  background:linear-gradient(135deg,var(--blue),#7cffd4);
-  color:#001018;
-}
-
-.toggle{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:10px;
-}
-
-/* ===== TOURNAMENT ===== */
-.tournament{
-  margin-top:40px;
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  gap:25px;
-  align-items:center;
-}
-
-.mid-title{
-  text-align:center;
-  font-weight:900;
-  color:var(--gold);
-  letter-spacing:6px;
-}
-
-.column{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-
-/* CARD */
-.card{
-  background:linear-gradient(160deg,#13255a,#020617);
-  border-radius:18px;
-  padding:14px;
-  box-shadow:0 15px 35px rgba(0,0,0,.6);
-  cursor:pointer;
-}
-.card h3{
-  margin:0;
-  color:var(--gold);
-  text-align:center;
-}
-.content{
-  display:none;
-  margin-top:10px;
-}
-.card.open .content{display:block}
-
-.member{
-  opacity:0;
-  transform:translateX(-6px);
-  animation:enter .4s ease forwards;
-}
-@keyframes enter{
-  to{opacity:1;transform:none}
-}
-
-.L{color:#38bdf8}
-.P{color:#f472b6}
-
-.copy-btn{
-  margin-top:20px;
-  background:linear-gradient(135deg,#fde047,#f59e0b);
-  color:#3b2100;
-}
-
-/* Responsive */
-@media(max-width:900px){
-  .tournament{grid-template-columns:1fr}
-}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
-
 <body>
-
-<h1>RN4</h1>
-<div class="sub">Tournament Mode</div>
-
-<div class="panel">
-  <div class="grid-2">
-    <div>
-      <label>Nama Laki-laki</label>
-      <textarea id="male" placeholder="contoh:
-andi
-ikan
-ayam"></textarea>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo">R4</div>
+      <div><h1>RN4</h1><p>TOURNAMENT SYSTEM</p></div>
     </div>
-    <div>
-      <label>Nama Perempuan</label>
-      <textarea id="female" placeholder="contoh:
-siti
-ayu
-bunga"></textarea>
+    <div class="status">SYSTEM READY</div>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">/ GROUP GENERATOR</div>
+    <h2>Build your team.</h2>
+    <p>Atur peserta, sesuaikan aturan, lalu buat kelompok secara acak.</p>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h3>01 / DATA PESERTA</h3><span class="tag">INPUT</span></div>
+    <div class="form-grid">
+      <div><label for="male">PESERTA LAKI-LAKI</label>
+        <textarea id="male" placeholder="Masukkan satu nama per baris..."></textarea></div>
+      <div><label for="female">PESERTA PEREMPUAN</label>
+        <textarea id="female" placeholder="Masukkan satu nama per baris..."></textarea></div>
     </div>
-  </div>
+    <div class="stats">
+      <div class="stat"><span>TOTAL PESERTA</span><strong id="total">0</strong></div>
+      <div class="stat"><span>LAKI-LAKI</span><strong id="maleTotal">0</strong></div>
+      <div class="stat"><span>PEREMPUAN</span><strong id="femaleTotal">0</strong></div>
+    </div>
+    <div class="settings">
+      <div class="setting"><label for="groupCount">JUMLAH KELOMPOK</label>
+        <select id="groupCount">
+          <option value="2">02 kelompok</option><option value="3">03 kelompok</option>
+          <option value="4" selected>04 kelompok</option><option value="5">05 kelompok</option>
+          <option value="6">06 kelompok</option><option value="7">07 kelompok</option>
+          <option value="8">08 kelompok</option><option value="9">09 kelompok</option>
+          <option value="10">10 kelompok</option>
+        </select>
+      </div>
+      <div class="setting"><label>BATAS PESERTA</label>
+        <div class="switch-row"><span>Maks. laki-laki / kelompok</span>
+          <input type="checkbox" id="ruleMale" checked aria-label="Aktifkan batas laki-laki"></div>
+        <input type="number" id="maxMale" value="3" min="0" step="1" aria-label="Batas laki-laki per kelompok">
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" id="generate">GENERATE ↗</button>
+      <button class="btn secondary" id="reset">RESET DATA</button>
+    </div>
+  </section>
 
-  <div class="stats" id="stats">L: 0 | P: 0 | Total: 0</div>
-
-  <label>Jumlah Kelompok</label>
-  <select id="groupCount"></select>
-
-  <div class="toggle">
-    <input type="checkbox" id="ruleMale" checked>
-    <label>Maksimal laki-laki per kelompok</label>
-  </div>
-
-  <input type="number" id="maxMale" value="3" min="0">
-
-  <button onclick="generate()">⚡ GENERATE TOURNAMENT</button>
+  <div class="results-head"><h2>Hasil pembagian</h2><span id="resultInfo">BELUM ADA HASIL</span></div>
+  <section class="groups" id="groups">
+    <div class="empty">Masukkan peserta lalu tekan GENERATE untuk memulai.</div>
+  </section>
+  <button class="btn secondary" id="copy" style="margin-top:15px">COPY HASIL KE CLIPBOARD</button>
+  <footer>RN4 SYSTEM · BUILT FOR TOURNAMENTS</footer>
 </div>
-
-<div class="panel">
-  <button class="copy-btn" onclick="copyAll()">📋 COPY HASIL</button>
-</div>
-
-<div class="tournament" id="tournament"></div>
-
-<!-- SOUND -->
-<audio id="sGenerate" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"></audio>
-<audio id="sOpen" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const maleEl=document.getElementById("male");
-const femaleEl=document.getElementById("female");
-const stats=document.getElementById("stats");
+const $ = id => document.getElementById(id);
+let currentGroups = [];
 
-function updateStats(){
-  const m=maleEl.value.split("\n").filter(x=>x.trim());
-  const f=femaleEl.value.split("\n").filter(x=>x.trim());
-  stats.innerText=`L: ${m.length} | P: ${f.length} | Total: ${m.length+f.length}`;
+function namesFrom(id) {
+  return $(id).value.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
 }
-maleEl.oninput=femaleEl.oninput=updateStats;
-updateStats();
+function updateStats() {
+  const m = namesFrom("male").length, f = namesFrom("female").length;
+  $("total").textContent = m + f;
+  $("maleTotal").textContent = m;
+  $("femaleTotal").textContent = f;
+}
+$("male").addEventListener("input", updateStats);
+$("female").addEventListener("input", updateStats);
 
-const gc=document.getElementById("groupCount");
-for(let i=2;i<=10;i++) gc.innerHTML+=`<option>${i}</option>`;
-
-function shuffle(a){
-  for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
+function toast(message) {
+  const el = $("toast");
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => el.classList.remove("show"), 2600);
+}
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
 }
+function generate() {
+  const males = namesFrom("male").map(n => ({n, g:"L"}));
+  const females = namesFrom("female").map(n => ({n, g:"P"}));
+  const students = [...males, ...females];
+  const count = Number($("groupCount").value);
+  const limitOn = $("ruleMale").checked;
+  const limit = Number($("maxMale").value);
 
-function generate(){
-  document.getElementById("sGenerate").play();
+  if (!students.length) return toast("Masukkan setidaknya satu peserta.");
+  if (limitOn && (!Number.isInteger(limit) || limit < 0))
+    return toast("Batas laki-laki harus bilangan bulat ≥ 0.");
+  if (limitOn && males.length > count * limit)
+    return toast("Batas laki-laki tidak cukup. Tambah batas atau jumlah kelompok.");
 
-  let males=maleEl.value.split("\n").filter(x=>x).map(n=>({n,g:"L"}));
-  let females=femaleEl.value.split("\n").filter(x=>x).map(n=>({n,g:"P"}));
-
-  let students=[...males,...females];
   shuffle(students);
+  const groups = Array.from({length:count}, () => []);
+  const maleCounts = Array(count).fill(0);
+  const ordered = limitOn
+    ? [...students.filter(s => s.g === "L"), ...students.filter(s => s.g === "P")]
+    : students;
 
-  const gCount=+gc.value;
-  const rule=document.getElementById("ruleMale").checked;
-  const maxMale=+document.getElementById("maxMale").value;
-
-  let groups=Array.from({length:gCount},()=>[]);
-  let maleCount=Array(gCount).fill(0);
-
-  let idx=0;
-  students.forEach(s=>{
-    let tries=0;
-    while(tries<gCount){
-      let gi=idx%gCount;
-      if(!rule || s.g==="P" || maleCount[gi]<maxMale){
-        groups[gi].push(s);
-        if(s.g==="L") maleCount[gi]++;
-        idx++;
-        break;
-      }
-      idx++; tries++;
-    }
-  });
-
-  render(groups);
+  for (const student of ordered) {
+    const candidates = groups.map((group,i) => ({i,size:group.length}))
+      .filter(x => !limitOn || student.g !== "L" || maleCounts[x.i] < limit)
+      .sort((a,b) => a.size - b.size);
+    if (!candidates.length) return toast("Pembagian gagal. Periksa batas peserta.");
+    const smallest = candidates[0].size;
+    const tied = candidates.filter(x => x.size === smallest);
+    const chosen = tied[Math.floor(Math.random() * tied.length)].i;
+    groups[chosen].push(student);
+    if (student.g === "L") maleCounts[chosen]++;
+  }
+  currentGroups = groups;
+  render();
+  toast("Pembagian berhasil dibuat.");
 }
-
-function render(groups){
-  const t=document.getElementById("tournament");
-  t.innerHTML="";
-
-  let left=document.createElement("div");
-  left.className="column";
-  let right=document.createElement("div");
-  right.className="column";
-
-  groups.forEach((g,i)=>{
-    let html=g.map((s,j)=>`
-      <div class="member" style="animation-delay:${j*0.15}s">
-        ${j+1}. ${s.n} (${s.g})
-      </div>`).join("");
-
-    let card=document.createElement("div");
-    card.className="card";
-    card.innerHTML=`
-      <h3>KELOMPOK ${i+1}</h3>
-      <div class="content">${html}</div>
-    `;
-    card.onclick=()=>{
-      card.classList.toggle("open");
-      document.getElementById("sOpen").play();
-    };
-
-    (i%2===0?left:right).appendChild(card);
-  });
-
-  let mid=document.createElement("div");
-  mid.className="mid-title";
-  mid.innerHTML="RN4";
-
-  t.append(left,mid,right);
-}
-
-function copyAll(){
-  let text="";
-  document.querySelectorAll(".card").forEach((c,i)=>{
-    text+=`Kelompok ${i+1}:\n`;
-    c.querySelectorAll(".member").forEach(m=>{
-      text+=m.innerText+"\n";
+function render() {
+  const container = $("groups");
+  container.innerHTML = "";
+  currentGroups.forEach((group,index) => {
+    const card = document.createElement("details");
+    card.className = "group";
+    card.open = true;
+    const head = document.createElement("summary");
+    head.className = "group-head";
+    const title = document.createElement("div");
+    const name = document.createElement("div");
+    name.className = "group-name";
+    name.textContent = "KELOMPOK " + String(index + 1).padStart(2,"0");
+    const meta = document.createElement("div");
+    meta.className = "group-meta";
+    meta.textContent = group.length + " peserta";
+    title.append(name,meta);
+    const number = document.createElement("div");
+    number.className = "group-num";
+    number.textContent = String(index + 1).padStart(2,"0");
+    head.append(title,number);
+    const members = document.createElement("div");
+    members.className = "members";
+    group.forEach((student,i) => {
+      const row = document.createElement("div");
+      row.className = "member";
+      const num = document.createElement("span");
+      num.className = "num";
+      num.textContent = String(i + 1).padStart(2,"0");
+      const nameEl = document.createElement("span");
+      nameEl.className = "member-name";
+      nameEl.textContent = student.n;
+      const gender = document.createElement("span");
+      gender.className = "gender " + student.g;
+      gender.textContent = student.g;
+      row.append(num,nameEl,gender);
+      members.appendChild(row);
     });
-    text+="\n";
+    if (!group.length) members.textContent = "Belum ada peserta.";
+    card.append(head,members);
+    container.appendChild(card);
   });
-  navigator.clipboard.writeText(text);
-  alert("Hasil dicopy!");
+  const total = currentGroups.reduce((sum,g) => sum + g.length,0);
+  $("resultInfo").textContent = total + " PESERTA · " + currentGroups.length + " KELOMPOK";
 }
+$("generate").addEventListener("click",generate);
+$("reset").addEventListener("click",() => {
+  $("male").value = "";
+  $("female").value = "";
+  currentGroups = [];
+  updateStats();
+  $("groups").innerHTML = '<div class="empty">Masukkan peserta lalu tekan GENERATE untuk memulai.</div>';
+  $("resultInfo").textContent = "BELUM ADA HASIL";
+  toast("Data dan hasil dibersihkan.");
+});
+$("copy").addEventListener("click",async () => {
+  if (!currentGroups.length) return toast("Generate kelompok terlebih dahulu.");
+  const text = currentGroups.map((group,i) =>
+    "KELOMPOK " + (i + 1) + "\n" +
+    (group.length ? group.map((s,j) => (j + 1) + ". " + s.n + " (" + s.g + ")").join("\n") : "Belum ada peserta.")
+  ).join("\n\n");
+  try {
+    if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+    else {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      const ok = document.execCommand("copy");
+      area.remove();
+      if (!ok) throw new Error("Clipboard tidak tersedia");
+    }
+    toast("Hasil berhasil disalin.");
+  } catch {
+    toast("Clipboard gagal. Coba buka melalui browser.");
+  }
+});
+updateStats();
 </script>
-
 </body>
 </html>
